@@ -13,7 +13,7 @@ class StoreTest(BaseTest):
                 self.assertEqual(response.status_code, 201)
                 self.assertIsNotNone(StoreModel.find_by_name('test'))
                 self.assertDictEqual(json.loads(response.data),
-                                     {'name': 'test', 'items': []})
+                                     {'name': 'test', 'id': 1, 'items': []})
 
     def test_create_duplicate_store(self):
         with self.app() as client:
@@ -46,7 +46,7 @@ class StoreTest(BaseTest):
                 self.assertIsNotNone(StoreModel.find_by_name('test'))
                 self.assertDictEqual(
                     json.loads(response.data),
-                    {'name': 'test', 'items': []})
+                    {'name': 'test', 'id': 1, 'items': []})
 
     def test_store_not_found(self):
         with self.app() as client:
@@ -70,7 +70,7 @@ class StoreTest(BaseTest):
                 self.assertIsNotNone(StoreModel.find_by_name('test'))
                 self.assertDictEqual(
                     json.loads(response.data),
-                    {'name': 'test', 'items': [
+                    {'name': 'test', 'id': 1, 'items': [
                         {'name': 'test_item', 'price': 19.99}
                     ]})
 
@@ -93,4 +93,4 @@ class StoreTest(BaseTest):
                 self.assertEqual(response.status_code, 200)
                 self.assertDictEqual(
                     json.loads(response.data),
-                    {'stores': [{'name': 'test', 'items': []}]})
+                    {'stores': [{'name': 'test', 'id': 1, 'items': []}]})
